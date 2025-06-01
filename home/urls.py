@@ -14,4 +14,6 @@ urlpatterns = [
     path('donate/',      views.donate,          name='donate'),
      path('support/',      views.support,          name='support'),
        path('transparency/', views.transparency, name='transparency'),
+    path('suggestions/', views.suggestions, name='suggestions'),
+    path('complaint/submit/', views.submit_complaint, name='submit_complaint'),
 ]

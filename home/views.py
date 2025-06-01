@@ -1,5 +1,8 @@
 # pages/views.py
 from django.shortcuts import render
+from networkx import reverse
+
+from home.models import Complaint
 
 def index(request):
     return render(request, 'templates/index.html')
@@ -90,3 +93,28 @@ def support(request):
     return render(request, 'templates/support.html')
 def donate(request):
     return render(request, 'templates/donate.html')
+def suggestions(request):
+    return render(request, 'templates/complaints.html')
+
+def submit_complaint(request):
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        subject = request.POST.get("subject", "").strip()
+        category = request.POST.get("category", "").strip()
+        description = request.POST.get("description", "").strip()
+
+        if name and email and subject and description:
+            Complaint.objects.create(
+                name=name,
+                email=email,
+                subject=subject,
+                category=category,
+                description=description,
+            )
+            messages.success(request, "Your complaint has been submitted. Thank you.")
+            return redirect(reverse("submit_complaint"))
+        else:
+            messages.error(request, "Please fill in all required fields.")
+
+    return render(request, "complaints/submit_complaint.html")

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+  <!-- Hero/Header for Complaint Page -->
+  <div class="slider-area2">
+    <div class="slider-height2 d-flex align-items-center" style="background-image: url({% static 'assets/img/gallery/section_bg02.png' %}); background-size: cover;">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <div class="hero-cap hero-cap2 pt-20">
+              <h2>Register a Suggestion</h2>
+              <p class="lead mt-3">Let us know how we can improve—submit your feedback or issue below.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complaint Registration Form -->
+  <section class="section-padding" style="padding-top: 60px; padding-bottom: 60px;">
+    <div class="container">
+      <h3 class="mb-4 text-center">Submit Your Suggestions</h3>
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+          <form method="post" action="{% url 'submit_complaint' %}" style="max-width: 600px; margin: 0 auto;">
+            {% csrf_token %}
+            <!-- Name Field -->
+            <div class="form-group mb-3">
+              <label for="id_name" style="font-weight: 600;">Full Name</label>
+              <input
+                type="text"
+                id="id_name"
+                name="name"
+                class="form-control"
+                placeholder="Enter your full name"
+                required
+                style="border-radius: 4px; padding: 12px;"
+              >
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group mb-3">
+              <label for="id_email" style="font-weight: 600;">Email Address</label>
+              <input
+                type="email"
+                id="id_email"
+                name="email"
+                class="form-control"
+                placeholder="Enter your email"
+                required
+                style="border-radius: 4px; padding: 12px;"
+              >
+            </div>
+
+            <!-- Subject Field -->
+            <div class="form-group mb-3">
+              <label for="id_subject" style="font-weight: 600;">Subject</label>
+              <input
+                type="text"
+                id="id_subject"
+                name="subject"
+                class="form-control"
+                placeholder="Briefly summarize your complaint"
+                required
+                style="border-radius: 4px; padding: 12px;"
+              >
+            </div>
+
+            <!-- Category / Department (optional) -->
+            <div class="form-group mb-3">
+              <label for="id_category" style="font-weight: 600;">Category</label>
+              <select
+                id="id_category"
+                name="category"
+                class="form-control"
+                style="border-radius: 4px; padding: 12px;"
+              >
+                <option value="">-- Select Category --</option>
+                <option value="Religious Center">Religious Center</option>
+                <option value="Education">Education</option>
+                <option value="Community Center">Community Center</option>
+                <option value="Charity & Donations">Charity &amp; Donations</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- Description Field -->
+            <div class="form-group mb-4">
+              <label for="id_description" style="font-weight: 600;">Complaint Details</label>
+              <textarea
+                id="id_description"
+                name="description"
+                class="form-control"
+                rows="5"
+                placeholder="Describe your issue or feedback in detail"
+                required
+                style="border-radius: 4px; padding: 12px;"
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="padding: 12px 32px; font-size: 16px; border-radius: 4px;"
+              >
+                Submit Suggestions
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
